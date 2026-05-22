@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechSphere 2025 — Register</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #13131a;
+    --border: rgba(255,255,255,0.08);
+    --accent: #7c6dfa;
+    --accent2: #fa6d8f;
+    --text: #f0f0f5;
+    --muted: #888899;
+    --success: #4ade80;
+    --error: #f87171;
+    --input-bg: #1c1c26;
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  header { padding: 2rem 2rem 0; max-width: 720px; margin: 0 auto; }
+
+  .event-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 11px; font-family: 'Syne', sans-serif; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid rgba(124,109,250,0.3); padding: 4px 12px; border-radius: 100px; margin-bottom: 1.5rem;
+  }
+  .event-tag::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(.7)} }
+
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem, 6vw, 3.8rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: .75rem; }
+  h1 span { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .event-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; margin: 1.25rem 0 2.5rem; }
+  .meta-item { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+
+  .divider { height: 1px; background: var(--border); max-width: 720px; margin: 0 auto; }
+
+  main { max-width: 720px; margin: 0 auto; padding: 2.5rem 2rem 4rem; }
+
+  .section-label {
+    font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 1.25rem; display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .form-group { margin-bottom: 1.5rem; }
+  label { display: block; font-size: 13px; font-weight: 500; color: var(--muted); margin-bottom: 6px; }
+
+  input[type="text"], input[type="email"], input[type="tel"], select, textarea {
+    width: 100%; background: var(--input-bg); border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 16px; font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--text);
+    outline: none; transition: border-color .2s, box-shadow .2s; appearance: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: rgba(124,109,250,.6); box-shadow: 0 0 0 3px rgba(124,109,250,.12); }
+  select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888899' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; cursor: pointer; }
+  select option { background: #1c1c26; }
+  textarea { resize: vertical; min-height: 90px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 500px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .option-group { display: flex; flex-direction: column; gap: 8px; }
+  .option-row {
+    display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+    border: 1px solid var(--border); border-radius: 10px; cursor: pointer; transition: border-color .2s, background .2s;
+  }
+  .option-row:hover { border-color: rgba(124,109,250,.4); background: rgba(124,109,250,.04); }
+  .option-row input { display: none; }
+  .option-indicator {
+    width: 18px; height: 18px; border: 1.5px solid var(--border); background: transparent;
+    flex-shrink: 0; transition: all .2s; display: flex; align-items: center; justify-content: center;
+  }
+  .option-row.is-radio .option-indicator { border-radius: 50%; }
+  .option-row.is-check .option-indicator { border-radius: 4px; }
+  .option-row.selected { border-color: rgba(124,109,250,.5); background: rgba(124,109,250,.06); }
+  .option-row.selected .option-indicator { background: var(--accent); border-color: var(--accent); }
+  .option-row.selected .option-indicator::after { content: ''; display: block; }
+  .is-radio.selected .option-indicator::after { width: 6px; height: 6px; background: #fff; border-radius: 50%; }
+  .is-check.selected .option-indicator::after { width: 10px; height: 7px; border-left: 2px solid #fff; border-bottom: 2px solid #fff; transform: rotate(-45deg) translateY(-1px); }
+  .option-label { font-size: 14px; flex: 1; }
+  .option-badge { font-size: 11px; padding: 2px 8px; border-radius: 100px; background: rgba(124,109,250,.15); color: var(--accent); font-weight: 500; }
+
+  .field-error { font-size: 12px; color: var(--error); margin-top: 5px; display: none; }
+  input.invalid, select.invalid { border-color: rgba(248,113,113,.5); }
+
+  .submit-area { margin-top: 2.5rem; }
+  button[type="submit"] {
+    width: 100%; padding: 15px; background: linear-gradient(135deg, var(--accent), #9b5de5);
+    border: none; border-radius: 12px; font-family: 'Syne', sans-serif; font-size: 15px;
+    font-weight: 700; letter-spacing: .04em; color: #fff; cursor: pointer; transition: opacity .2s, transform .15s;
+  }
+  button[type="submit"]:hover { opacity: .9; transform: translateY(-1px); }
+  button[type="submit"]:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+  .alert { padding: 14px 18px; border-radius: 10px; font-size: 14px; margin-top: 1rem; display: none; }
+  .alert.show { display: block; }
+  .alert.success { background: rgba(74,222,128,.1); border: 1px solid rgba(74,222,128,.3); color: var(--success); }
+  .alert.error { background: rgba(248,113,113,.1); border: 1px solid rgba(248,113,113,.3); color: var(--error); }
+
+  #success-screen { display: none; text-align: center; padding: 4rem 2rem; }
+  .checkmark { width: 64px; height: 64px; border-radius: 50%; background: rgba(74,222,128,.12); border: 1px solid rgba(74,222,128,.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 28px; }
+  #success-screen h2 { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 700; margin-bottom: .5rem; }
+  #success-screen p { color: var(--muted); font-size: 15px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="event-tag">Registration Open</div>
+  <h1>Tech<span>Sphere</span><br>2025</h1>
+  <div class="event-meta">
+    <span class="meta-item">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      November 14–16, 2025
+    </span>
+    <span class="meta-item">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      Cairo, Egypt
+    </span>
+    <span class="meta-item">
+      <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      500 Seats
+    </span>
+  </div>
+</header>
+
+<div class="divider"></div>
+
+<main>
+  <div id="form-wrapper">
+
+    <div class="section-label">Personal Info</div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" placeholder="Ahmed">
+        <div class="field-error" id="fname-err">Required</div>
+      </div>
+      <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" placeholder="Hassan">
+        <div class="field-error" id="lname-err">Required</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="ahmed@example.com">
+      <div class="field-error" id="email-err">Enter a valid email</div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" placeholder="+20 1XX XXX XXXX">
+    </div>
+
+    <div class="section-label" style="margin-top:2rem">Event Details</div>
+
+    <div class="form-group">
+      <label for="ticket">Ticket Type</label>
+      <select id="ticket">
+        <option value="">— Select a ticket —</option>
+        <option value="general">General Admission — Free</option>
+        <option value="student">Student Pass — EGP 50</option>
+        <option value="pro">Professional — EGP 200</option>
+        <option value="vip">VIP All-Access — EGP 500</option>
+      </select>
+      <div class="field-error" id="ticket-err">Please select a ticket type</div>
+    </div>
+
+    <div class="form-group">
+      <label>Preferred Track</label>
+      <div class="option-group">
+        <label class="option-row is-radio"><input type="radio" name="track" value="ai"><span class="option-indicator"></span><span class="option-label">AI & Machine Learning</span><span class="option-badge">Popular</span></label>
+        <label class="option-row is-radio"><input type="radio" name="track" value="security"><span class="option-indicator"></span><span class="option-label">Cybersecurity</span></label>
+        <label class="option-row is-radio"><input type="radio" name="track" value="web"><span class="option-indicator"></span><span class="option-label">Web & Cloud</span></label>
+        <label class="option-row is-radio"><input type="radio" name="track" value="robotics"><span class="option-indicator"></span><span class="option-label">Robotics & Embedded</span></label>
+      </div>
+      <div class="field-error" id="track-err">Please select a track</div>
+    </div>
+
+    <div class="section-label" style="margin-top:2rem">Add-ons</div>
+
+    <div class="form-group">
+      <label>Sessions (select all that apply)</label>
+      <div class="option-group">
+        <label class="option-row is-check"><input type="checkbox" name="sessions" value="workshop"><span class="option-indicator"></span><span class="option-label">Hands-on Workshops</span></label>
+        <label class="option-row is-check"><input type="checkbox" name="sessions" value="keynote"><span class="option-indicator"></span><span class="option-label">Keynote Talks</span></label>
+        <label class="option-row is-check"><input type="checkbox" name="sessions" value="networking"><span class="option-indicator"></span><span class="option-label">Networking Dinner</span></label>
+        <label class="option-row is-check"><input type="checkbox" name="sessions" value="hackathon"><span class="option-indicator"></span><span class="option-label">24hr Hackathon</span><span class="option-badge">New</span></label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="dietary">Dietary Requirements</label>
+      <select id="dietary">
+        <option value="none">No restrictions</option>
+        <option value="vegetarian">Vegetarian</option>
+        <option value="vegan">Vegan</option>
+        <option value="halal">Halal</option>
+        <option value="gluten-free">Gluten-Free</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="notes">Anything else?</label>
+      <textarea id="notes" placeholder="Accessibility needs, questions, etc."></textarea>
+    </div>
+
+    <div class="submit-area">
+      <button type="submit" id="submit-btn" onclick="handleSubmit()">Secure My Spot →</button>
+      <div class="alert error" id="alert-error"></div>
+    </div>
+  </div>
+
+  <div id="success-screen">
+    <div class="checkmark">✓</div>
+    <h2>You're in!</h2>
+    <p>Registration confirmed. See you at TechSphere 2025.</p>
+  </div>
+</main>
+
+<script>
+  document.querySelectorAll('.option-row').forEach(row => {
+    row.addEventListener('click', () => {
+      const input = row.querySelector('input');
+      if (input.type === 'radio') {
+        document.querySelectorAll(`input[name="${input.name}"]`).forEach(r => r.closest('.option-row').classList.remove('selected'));
+        input.checked = true;
+        row.classList.add('selected');
+      } else {
+        input.checked = !input.checked;
+        row.classList.toggle('selected', input.checked);
+      }
+    });
+  });
+
+  function req(id, errId) {
+    const el = document.getElementById(id), ok = el.value.trim() !== '';
+    el.classList.toggle('invalid', !ok);
+    document.getElementById(errId).style.display = ok ? 'none' : 'block';
+    return ok;
+  }
+
+  function validEmail(id, errId) {
+    const el = document.getElementById(id), ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
+    el.classList.toggle('invalid', !ok);
+    document.getElementById(errId).style.display = ok ? 'none' : 'block';
+    return ok;
+  }
+
+  async function handleSubmit() {
+    const a = req('fname','fname-err'), b = req('lname','lname-err');
+    const c = validEmail('email','email-err'), d = req('ticket','ticket-err');
+    const track = document.querySelector('input[name="track"]:checked');
+    document.getElementById('track-err').style.display = track ? 'none' : 'block';
+    if (!a || !b || !c || !d || !track) return;
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true; btn.textContent = 'Submitting…';
+
+    const payload = {
+      firstName:  document.getElementById('fname').value.trim(),
+      lastName:   document.getElementById('lname').value.trim(),
+      email:      document.getElementById('email').value.trim(),
+      phone:      document.getElementById('phone').value.trim(),
+      ticketType: document.getElementById('ticket').value,
+      track:      track.value,
+      sessions:   [...document.querySelectorAll('input[name="sessions"]:checked')].map(e => e.value),
+      dietary:    document.getElementById('dietary').value,
+      notes:      document.getElementById('notes').value.trim(),
+    };
+
+    try {
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      document.getElementById('form-wrapper').style.display = 'none';
+      document.getElementById('success-screen').style.display = 'block';
+    } catch (err) {
+      const el = document.getElementById('alert-error');
+      el.textContent = err.message || 'Something went wrong. Try again.';
+      el.classList.add('show');
+      btn.disabled = false; btn.textContent = 'Secure My Spot →';
+    }
+  }
+</script>
+</body>
+</html>
